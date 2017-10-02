@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import static android.R.attr.button;
 import static android.R.color.holo_green_light;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class Floor2 extends AppCompatActivity implements View.OnClickListener {
 
     Button[] btn = new Button[12];
     int[] ids = {R.id.BT1, R.id.BT2, R.id.BT3, R.id.BT4, R.id.BT5, R.id.BT6, R.id.BT7, R.id.BT8, R.id.BT9, R.id.BT10, R.id.BT11, R.id.BT12};
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==1)
-                startActivity(new Intent(MainActivity.this,Floor2.class));
+                    startActivity(new Intent(Floor2.this,MainActivity.class));
             }
 
             @Override
@@ -108,14 +108,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < btn.length; i++) {
             if (btn[i] == v)
                 if(state[i]==false) {
-                btn[i].setBackgroundColor(Color.RED);
+                    btn[i].setBackgroundColor(Color.RED);
                     state[i] = true;
-            } else{
+                } else{
                     state[i] = false;
                     btn[i].setBackgroundColor(Color.GREEN);
                 }
-            }
         }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
