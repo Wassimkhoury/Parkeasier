@@ -9,7 +9,7 @@ import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
 
     private NotificationCompat.Builder builder;
     private Button btnNotify;
@@ -17,7 +17,7 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_notification);
 
         btnNotify = (Button) findViewById(R.id.btnNotify);
 
@@ -34,13 +34,17 @@ public class NotificationActivity extends AppCompatActivity {
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, bIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);
 
-        btnNotify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Add as notification
-                NotificationManager manager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-                manager.notify(0, builder.build());
-            }
-        });
+        btnNotify.setOnClickListener(this);
+
+
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        NotificationManager manager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
+
     }
 }
