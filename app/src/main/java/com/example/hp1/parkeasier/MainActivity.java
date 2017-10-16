@@ -1,7 +1,9 @@
 package com.example.hp1.parkeasier;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,8 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import static android.R.attr.button;
+import static android.R.attr.color;
 import static android.R.color.holo_green_light;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int[] ids = {R.id.BT1, R.id.BT2, R.id.BT3, R.id.BT4, R.id.BT5, R.id.BT6, R.id.BT7, R.id.BT8, R.id.BT9, R.id.BT10, R.id.BT11, R.id.BT12};
 
     boolean[] state = {false, false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
+
     Button[] btnp = new Button[2];
     int[] idsp ={R.id.BTP1,R.id.BTP2};
 
@@ -54,6 +59,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < btn.length; i++) {
             btn[i] = (Button) findViewById(ids[i]);
             btn[i].setOnClickListener(this);
+        }
+        for (int i = 0; i < btnp.length; i++) {
+            btnp[i] = (Button) findViewById(idsp[i]);
+            btnp[i].setOnClickListener(this);
+        }
+        for (int i = 0; i < btnb.length; i++) {
+            btnb[i] = (Button) findViewById(idsb[i]);
+            btnb[i].setOnClickListener(this);
         }
 
         spCoffee1 = (Spinner) findViewById(R.id.spCoffee1);
@@ -108,13 +121,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < btn.length; i++) {
             if (btn[i] == v)
                 if(state[i]==false) {
-                btn[i].setBackgroundColor(Color.RED);
+                    btn[i].setBackgroundColor(Color.RED);
+                    btn[i].setText("full");
                     state[i] = true;
-            } else{
+                } else{
                     state[i] = false;
                     btn[i].setBackgroundColor(Color.GREEN);
+                    btn[i].setText("empty");
                 }
             }
+        for (int i = 0; i < btnp.length; i++) {
+            if (btnp[i] == v)
+                if(state[i]==false) {
+                    btnp[i].setBackgroundColor(Color.RED);
+                    btnp[i].setText("full");
+                    state[i] = true;
+                } else{
+                    state[i] = false;
+                    btnp[i].setBackgroundColor(getResources().getColor(R.color.purple));
+                    btnp[i].setText("empty");
+
+                }
+        }
+        for (int i = 0; i < btnb.length; i++) {
+
+            if (btnb[i] == v)
+                if(state[i]==false) {
+                    btnb[i].setBackgroundColor(Color.RED);
+                    btnb[i].setText("full");
+                    state[i] = true;
+                } else{
+                    state[i] = false;
+                    btnb[i].setBackgroundColor(Color.BLUE);
+                    btnb[i].setText("empty");
+                }
+        }
         }
 
     @Override
@@ -125,6 +166,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        AlertDialog.Builder Builder = new AlertDialog.Builder(this);
+        Builder.setTitle("About");
+        Builder.setMessage("our application is to let you win more time spending with friends and familys insted searching for parking places");
+
+        Builder.setPositiveButton("Done",new DialogInterface.OnClickListener(){
+
+            public void onClick(DialogInterface dialog,int which){
+               // Toast.makeText(getApplicationContext(),"Ok", Toast.LENGTH_LONG).show();
+            }
+
+
+        });
+        AlertDialog ad=Builder.create();
+        ad.show();
+
 
         return super.onOptionsItemSelected(item);
     }
