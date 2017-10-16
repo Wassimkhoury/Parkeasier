@@ -25,7 +25,7 @@ public class NotificationActivity extends AppCompatActivity {
         builder = new NotificationCompat.Builder(this);
 
         //customize the builder
-        builder.setSmallIcon(R.drawable.parking);
+        builder.setSmallIcon(R.drawable.parkingq);
         builder.setContentTitle("Notification Title");
         builder.setContentText("this is the body of the notification message");
 
