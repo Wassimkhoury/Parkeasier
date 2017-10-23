@@ -1,5 +1,8 @@
 package com.example.hp1.parkeasier;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,6 +66,19 @@ public class CameraActivity extends Activity implements OnClickListener {
             Bundle extra = data.getExtras();
             bitmap  = (Bitmap) extra.get("data");
             imageView.setImageBitmap(bitmap);
+            File root = Environment.getExternalStorageDirectory();
+            File file = new File(root.getAbsolutePath()+"/DCIM/Camera/img.jpg");
+            try
+            {
+                file.createNewFile();
+                FileOutputStream ostream = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
+                ostream.close();
+            }
+            catch (IOException e)
+            {
+
+            }
         }
         else if(requestCode == SELECT_IMAGE && resultCode == RESULT_OK)
         {
